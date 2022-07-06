@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "332129768284",
+    "firebase_url": "https://cookingeasily-df68d-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "cookingeasily-df68d",
+    "storage_bucket": "cookingeasily-df68d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:332129768284:android:b41bc1f0eee20455346799",
+        "android_client_info": {
+          "package_name": "com.example.cookingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "332129768284-ot53hcu0qob5mq55lqrmd8tharjqadn5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCGK21qmu9rGnv3WNksnyL2VNfvu-hst8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "332129768284-ot53hcu0qob5mq55lqrmd8tharjqadn5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:332129768284:android:41113b0c0705d37d346799",
+        "android_client_info": {
+          "package_name": "cookingeasy.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "332129768284-ot53hcu0qob5mq55lqrmd8tharjqadn5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCGK21qmu9rGnv3WNksnyL2VNfvu-hst8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "332129768284-ot53hcu0qob5mq55lqrmd8tharjqadn5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
