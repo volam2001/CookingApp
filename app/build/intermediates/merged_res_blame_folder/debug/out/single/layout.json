@@ -1,0 +1,74 @@
+[
+    {
+        "merged": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-mergeDebugResources-27:\\layout\\ketquatimkiem.xml",
+        "source": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-main-30:\\layout\\ketquatimkiem.xml"
+    },
+    {
+        "merged": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-mergeDebugResources-27:\\layout\\dong_banner.xml",
+        "source": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-main-30:\\layout\\dong_banner.xml"
+    },
+    {
+        "merged": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-mergeDebugResources-27:\\layout\\chitietmonan.xml",
+        "source": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-main-30:\\layout\\chitietmonan.xml"
+    },
+    {
+        "merged": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-mergeDebugResources-27:\\layout\\dongmonan.xml",
+        "source": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-main-30:\\layout\\dongmonan.xml"
+    },
+    {
+        "merged": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-mergeDebugResources-27:\\layout\\fragment_slideshow.xml",
+        "source": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-main-30:\\layout\\fragment_slideshow.xml"
+    },
+    {
+        "merged": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-mergeDebugResources-27:\\layout\\content_main.xml",
+        "source": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-main-30:\\layout\\content_main.xml"
+    },
+    {
+        "merged": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-mergeDebugResources-27:\\layout\\fragment_home.xml",
+        "source": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-main-30:\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-mergeDebugResources-27:\\layout\\nav_header_main.xml",
+        "source": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-main-30:\\layout\\nav_header_main.xml"
+    },
+    {
+        "merged": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-mergeDebugResources-27:\\layout\\app_bar_main.xml",
+        "source": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-main-30:\\layout\\app_bar_main.xml"
+    },
+    {
+        "merged": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-mergeDebugResources-27:\\layout\\fragment_gallery.xml",
+        "source": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-main-30:\\layout\\fragment_gallery.xml"
+    },
+    {
+        "merged": "com.example.cookingapp-mergeDebugResources-27:/layout/dongdanhsach.xml",
+        "source": "com.example.cookingapp-main-30:/layout/dongdanhsach.xml"
+    },
+    {
+        "merged": "com.example.cookingapp-mergeDebugResources-27:/layout/ketquatimkiem.xml",
+        "source": "com.example.cookingapp-main-30:/layout/ketquatimkiem.xml"
+    },
+    {
+        "merged": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-mergeDebugResources-27:\\layout\\dongchitiet.xml",
+        "source": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-main-30:\\layout\\dongchitiet.xml"
+    },
+    {
+        "merged": "com.example.cookingapp-mergeDebugResources-27:/layout/danhsachlistmonan.xml",
+        "source": "com.example.cookingapp-main-30:/layout/danhsachlistmonan.xml"
+    },
+    {
+        "merged": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-mergeDebugResources-27:\\layout\\dongthemmonan.xml",
+        "source": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-main-30:\\layout\\dongthemmonan.xml"
+    },
+    {
+        "merged": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-mergeDebugResources-27:\\layout\\activityhome.xml",
+        "source": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-main-30:\\layout\\activityhome.xml"
+    },
+    {
+        "merged": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-mergeDebugResources-27:\\layout\\banner.xml",
+        "source": "C:\\Android\\Sdk\\daemon\\7.3.3\\com.example.cookingapp-main-30:\\layout\\banner.xml"
+    },
+    {
+        "merged": "com.example.cookingapp-mergeDebugResources-27:/layout/danhsachmonan.xml",
+        "source": "com.example.cookingapp-main-30:/layout/danhsachmonan.xml"
+    }
+]

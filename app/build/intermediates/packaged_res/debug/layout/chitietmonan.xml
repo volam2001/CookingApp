@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/drawerlayout"
+    android:background="#F6D4A7"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button
+        android:text="Trang chủ"
+        android:id="@+id/btnHome"
+        android:layout_width="wrap_content"
+        android:backgroundTint="#E82A2739"
+        android:layout_height="wrap_content"></Button>
+        <TextView
+            android:padding="5dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:text="Cách nấu món này"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/rcvdongchitiet"
+            android:layout_height="wrap_content"/>
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="320dp"
+        app:menu="@menu/activity_main_drawer"
+        app:itemIconTint="@color/purple_200"
+        app:itemTextColor="@color/purple_200"
+        android:layout_gravity="start"
+        android:visibility="gone"
+        android:id="@+id/navigationview"
+        android:layout_height="match_parent"/>
+
+
+</LinearLayout>
