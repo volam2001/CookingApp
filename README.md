@@ -35,3 +35,10 @@
 | 3      | 19522154      | Nguyễn Văn Tài         |[nguyentai090301](https://github.com/nguyentai090301)    |19522154@gm.uit.edu.vn   |
 ## ĐỒ ÁN CUỐI KỲ
 - ỨNG DỤNG HƯỚNG DẪN NẤU ĂN
+- CÁCH BUILD ỨNG DỤNG
+  + Yêu cầu:
+    *Android Studio
+    *Java
+  + Clone repos về local sau đó chuyển sang nhánh master bằng: 
+  `git checkout master`
+  + Sau đó build ứng dụng trong Android Studio và chạy ứng dụng bình thường
