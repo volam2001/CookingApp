@@ -1,6 +1,7 @@
 package com.example.cookingapp.ui.chitietmonan;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -97,14 +98,48 @@ public class ChiTietActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         rcvdongchitiet.setLayoutManager(linearLayoutManager);
         rcvdongchitiet.setAdapter(chiTietAdapter);
+        Log.d(String.valueOf(monAn.getYeuthich()), "onCreate: ");
+        if (monAn.getYeuthich() == Long.valueOf(1))
+        {
+            Log.d(String.valueOf(monAn.getYeuthich()), "onCreate: ");
+            btnlove.setText("Unlike");
+        }
+        else
+        {
+            btnlove.setText("Like");
+        }
+        if (monAn.getDanau() == Long.valueOf(1))
+        {
+            btndone.setText("Undone");
+        }
+        else
+        {
+            btndone.setText("Done");
+        }
         btndone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                DatabaseReference databaseReference = firebaseDatabase.getReference();
-                databaseReference.child("danau/"+monAn.getTenmonan()).setValue(monAn);
-                Toast toast = Toast.makeText(getApplicationContext(), "Bạn thật giỏi quá", Toast.LENGTH_SHORT);
-                toast.show();
+
+                if (monAn.getDanau() == Long.valueOf(0))
+                {
+                    btndone.setText("Undone");
+                    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                    DatabaseReference databaseReference = firebaseDatabase.getReference();
+                    monAn.setDanau(Long.valueOf(1));
+                    databaseReference.child("monan/" + monAn.getTenmonan()).setValue(monAn);
+                    Toast toast = Toast.makeText(getApplicationContext(), "Bạn thật giỏi quá", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else
+                {
+                    btndone.setText("Done");
+                    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                    DatabaseReference databaseReference = firebaseDatabase.getReference();
+                    monAn.setDanau(Long.valueOf(0));
+                    databaseReference.child("monan/" + monAn.getTenmonan()).setValue(monAn);
+                    Toast toast = Toast.makeText(getApplicationContext(), "Bạn đã bỏ chọn hoàn thành", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
         });
         btnlove.setOnClickListener(new View.OnClickListener() {
@@ -112,9 +147,21 @@ public class ChiTietActivity extends AppCompatActivity {
             public void onClick(View view) {
                 FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                 DatabaseReference databaseReference = firebaseDatabase.getReference();
-                databaseReference.child("yeuthich/"+monAn.getTenmonan()).setValue(monAn);
-                Toast toast = Toast.makeText(getApplicationContext(), "Đã thêm vào danh sách yêu thích", Toast.LENGTH_SHORT);
-                toast.show();
+                if (monAn.getYeuthich() == Long.valueOf(0)) {
+                    monAn.setYeuthich(Long.valueOf(1));
+                    btnlove.setText("Unlike");
+                    databaseReference.child("monan/" + monAn.getTenmonan()).setValue(monAn);
+                    Toast toast = Toast.makeText(getApplicationContext(), "Đã thêm vào danh sách yêu thích", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else
+                {
+                    monAn.setYeuthich(Long.valueOf(0));
+                    btnlove.setText("Like");
+                    databaseReference.child("monan/" + monAn.getTenmonan()).setValue(monAn);
+                    Toast toast = Toast.makeText(getApplicationContext(), "Đã xóa khỏi danh sách yêu thích", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
         });
     }

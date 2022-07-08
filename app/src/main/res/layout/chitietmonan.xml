@@ -22,20 +22,20 @@
             android:backgroundTint="#E82A2739"
 
             android:id="@+id/btndone"
-            android:text="Done"
+            android:text="Hoàn thành"
             android:layout_height="wrap_content"/>
         <Button
             android:textSize="10dp"
             android:id="@+id/btnyeuthich"
-            android:backgroundTint="#E84C495A"
+            android:backgroundTint="#E82A2739"
 
             android:layout_width="wrap_content"
             android:layout_margin="3dp"
-            android:text="Hủy yêu thích"
+            android:text="Yêu thích"
             android:layout_height="wrap_content"/>
         <Button
             android:textSize="10dp"
-            android:text="Update"
+            android:text="Home"
             android:layout_margin="3dp"
             android:id="@+id/btnHome"
             android:layout_width="wrap_content"

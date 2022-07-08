@@ -62,15 +62,16 @@ public class YeuThichActivity extends AppCompatActivity {
         rcvDSMA.setAdapter(monanAdapter);
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference();
-        databaseReference.child("yeuthich").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("monan").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 for(DataSnapshot snap: snapshot.getChildren())
                 {
                         MonAn monAn = snap.getValue(MonAn.class);
-                        listMonAn.add(monAn);
-                    Log.d(monAn.getTenmonan(), "Các món đã yêu thích");
+                        if (monAn.getYeuthich() == Long.valueOf(1)) {
+                            listMonAn.add(monAn);
+                        }
                 }
                 monanAdapter.notifyDataSetChanged();
             }

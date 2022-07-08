@@ -174,18 +174,18 @@ public class MainActivity  extends AppCompatActivity {
         monan_booleanFlag.add(true);
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference();
-        databaseReference.child("danau").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("monan").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot snap: snapshot.getChildren())
                 {
                     MonAn monAn = (MonAn) snap.getValue( MonAn.class);
-                    for(int i = 0; i <monan_booleanFlag.size();i++)
-                    {
-                        if (monAn.getTenmonan().toLowerCase(Locale.ROOT) == monan_stringFlag.get(i))
-                        {
+                    if (monAn.getDanau() ==Long.valueOf(1)) {
+                        for (int i = 0; i < monan_booleanFlag.size(); i++) {
+                            if (monAn.getTenmonan().toLowerCase(Locale.ROOT) == monan_stringFlag.get(i)) {
 
-                            monan_booleanFlag.set(i, false);
+                                monan_booleanFlag.set(i, false);
+                            }
                         }
                     }
                 }

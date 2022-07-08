@@ -23,17 +23,39 @@ import java.util.List;
 
 public class MonAn implements Serializable {
     private  String tenmonan;
+
+
     private  String hinhanh;
     private  String tendaubep;
     private  String nguyenlieu;
     private List<ChiTiet> chitietcacbuoc;
+    private Long danau;
+    private Long yeuthich;
 
-    public MonAn(String tenmonan, String hinhanh, String tendaubep, String nguyenlieu, List<ChiTiet> chitietcacbuoc) {
+
+    public MonAn(String tenmonan, String hinhanh, String tendaubep, String nguyenlieu, List<ChiTiet> chitietcacbuoc, Long danau, Long yeuthich) {
         this.tenmonan = tenmonan;
         this.hinhanh = hinhanh;
         this.tendaubep = tendaubep;
         this.nguyenlieu = nguyenlieu;
         this.chitietcacbuoc = chitietcacbuoc;
+        this.danau = danau;
+        this.yeuthich = yeuthich;
+    }
+    public Long getDanau() {
+        return danau;
+    }
+
+    public void setDanau(Long danau) {
+        this.danau = danau;
+    }
+
+    public Long getYeuthich() {
+        return yeuthich;
+    }
+
+    public void setYeuthich(Long yeuthich) {
+        this.yeuthich = yeuthich;
     }
     public String getTenmonan() {
         return tenmonan;

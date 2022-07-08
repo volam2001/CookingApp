@@ -53,15 +53,28 @@ public class TimKiemActivity extends AppCompatActivity {
         Bundle bundle =  getIntent().getExtras();
         if (bundle == null)
         {
-            Log.d("Empty", "onCreate: ");
             return ;
         }
         String query = (String) bundle.get("query");
-        Log.d("Câu query là:", query);
         loadMonAn(query);
     }
     public void loadMonAn(String query)
     {
+        List<String> haisan = new ArrayList<>();
+        haisan.add("tôm");
+        haisan.add("sò");
+        haisan.add("mực");
+        haisan.add("cá");
+        haisan.add("cua");
+        List<String> raucu = new ArrayList<>();
+        raucu.add("rau");
+        raucu.add("khoai");
+        raucu.add("cà rốt");
+        raucu.add("hành");
+        raucu.add("cải");
+        raucu.add("cà chua");
+        raucu.add("bí");
+
         listMonAn = new ArrayList<>();
         chiTietList = new ArrayList<>();
         monanAdapter = new MonAnAdapter(listMonAn, getApplicationContext());
@@ -70,33 +83,42 @@ public class TimKiemActivity extends AppCompatActivity {
         rcvDSMA.setAdapter(monanAdapter);
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference();
-        Log.d(query, "Kết quả tìm kiếm: ");
         databaseReference.child("monan").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("load", "onDataChange: ");
-
                 for(DataSnapshot snap: snapshot.getChildren())
                 {
-                    chiTietList = new ArrayList<>();
-
                     String tenmonan  = snap.child("tenmonan").getValue(String.class);
                     String tennguyenlieu = snap.child("nguyenlieu").getValue(String.class);
-                    if (tenmonan.toLowerCase(Locale.ROOT).contains(query.toLowerCase(Locale.ROOT)) ||
-                        tennguyenlieu.toLowerCase(Locale.ROOT).contains(query.toLowerCase(Locale.ROOT))) {
-                        DataSnapshot dataref = snap.child("chitietmonan");
-                        for (DataSnapshot item : dataref.getChildren()) {
-                            String link = item.child("link").getValue(String.class);
-                            String chitiet = item.child("chitiet").getValue(String.class);
-                            chiTietList.add(new ChiTiet(link, chitiet));
+                    final String querryCopy = query;
+                    if ("hải sản" == query) {
+                        for (int i = 0; i < haisan.size(); i++) {
+                            if (tenmonan.toLowerCase(Locale.ROOT).contains(haisan.get(i)) ||
+                                    tennguyenlieu.toLowerCase(Locale.ROOT).contains(haisan.get(i))) {
+                                MonAn monAn = snap.getValue(MonAn.class);
+                                listMonAn.add(monAn);
+                                break;
+                            }
                         }
-                        //ớt
-//
-                        MonAn monAn = snap.getValue(MonAn.class);
-//                        monAn.setChitietcacbuoc(chiTietList);
-                        listMonAn.add(monAn);
+                    }
+                    //hải sản
+                    else if (querryCopy.toLowerCase(Locale.ROOT) == "rau củ" || querryCopy.toLowerCase(Locale.ROOT) == "thực vật") {
+                        for (int i = 0; i < haisan.size(); i++) {
+
+                            if (tenmonan.toLowerCase(Locale.ROOT).contains(raucu.get(i)) ||
+                                    tennguyenlieu.toLowerCase(Locale.ROOT).contains(raucu.get(i))) {
+                                MonAn monAn = snap.getValue(MonAn.class);
+                                listMonAn.add(monAn);
+                                break;
+                            }
+                        }
                     }
 
+                    if (tenmonan.toLowerCase(Locale.ROOT).contains(query) ||
+                            tennguyenlieu.toLowerCase(Locale.ROOT).contains(query)) {
+                        MonAn monAn = snap.getValue(MonAn.class);
+                        listMonAn.add(monAn);
+                    }
                 }
                 monanAdapter.notifyDataSetChanged();
             }

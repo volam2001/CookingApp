@@ -97,7 +97,7 @@ public class ThemMonActivity extends AppCompatActivity {
         }
 
         hinhanh = "https://cdn.tgdd.vn/2021/05/CookProduct/47884A90-BACC-4926-B0B9-D0F50640C8AE-SunnyTrinh-Copy(2)-1200x676.jpeg";
-        MonAn monAn = new MonAn(txttenmonan.getText().toString(), hinhanh, txttendaubep.getText().toString(), txtnguyenlieu.getText().toString(), chiTietList);
+        MonAn monAn = new MonAn(txttenmonan.getText().toString(), hinhanh, txttendaubep.getText().toString(), txtnguyenlieu.getText().toString(), chiTietList, Long.valueOf(0), Long.valueOf(0));
         String key = txttenmonan.getText().toString();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference().child("monan/"+key);

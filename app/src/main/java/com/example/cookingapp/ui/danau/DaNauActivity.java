@@ -60,14 +60,16 @@ public class DaNauActivity extends AppCompatActivity {
         rcvDSMA.setAdapter(monanAdapter);
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference();
-        databaseReference.child("danau").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("monan").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 for(DataSnapshot snap: snapshot.getChildren())
                 {
                     MonAn monAn = snap.getValue(MonAn.class);
-                    listMonAn.add(monAn);
+                    if (monAn.getDanau() == Long.valueOf(1)) {
+                        listMonAn.add(monAn);
+                    }
                 }
                 monanAdapter.notifyDataSetChanged();
             }
