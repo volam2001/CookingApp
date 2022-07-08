@@ -23,7 +23,6 @@
                 android:imeOptions="actionSearch"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:drawablePadding="10dp"
                 android:hint="Nhập tên tìm kiếm"
                 android:id="@+id/editTimkiem"
                 android:layout_width="match_parent"
@@ -32,7 +31,6 @@
         <TextView
             android:padding="5dp"
             android:textSize="18sp"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:text="Danh Sách Món Ăn"
             android:layout_width="match_parent"
@@ -45,7 +43,6 @@
             android:padding="5dp"
             android:textSize="18sp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
             android:text="Đề xuất cho bạn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

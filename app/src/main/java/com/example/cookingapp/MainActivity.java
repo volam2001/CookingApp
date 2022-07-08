@@ -58,23 +58,23 @@ public class MainActivity  extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activityhome);
-        navigationView = findViewById(R.id.navigationview);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                if (id == R.id.nav_home)
-                {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    getApplicationContext().startActivity(intent);
-                }
-                else if (id ==R.id.navdanau)
-                {
-                    Intent intent = new Intent(getApplicationContext(), DaNauActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    getApplicationContext().startActivity(intent);
-                }
+            navigationView = findViewById(R.id.navigationview);
+            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    int id = item.getItemId();
+                    if (id == R.id.nav_home)
+                    {
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        getApplicationContext().startActivity(intent);
+                    }
+                    else if (id ==R.id.navdanau)
+                    {
+                        Intent intent = new Intent(getApplicationContext(), DaNauActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        getApplicationContext().startActivity(intent);
+                    }
                 else if (id ==R.id.navyeuthich)
                 {
                     Intent intent = new Intent(getApplicationContext(), YeuThichActivity.class);
@@ -115,7 +115,7 @@ public class MainActivity  extends AppCompatActivity {
             }
         });
         loadMonAn();
-        loadMonAnDeXuat();
+        checkMonDaNau();
     }
 
     @Override
@@ -149,30 +149,29 @@ public class MainActivity  extends AppCompatActivity {
             }
         });
     }
-    public List<String> checkMonDaNau()
+    public void checkMonDaNau()
     {
-        final List<String> answer = new ArrayList<>();
+        List<String> answer = new ArrayList<>();
         listMonAnDaNau = new ArrayList<>();
-        final String[] monan_stringFlag = new String[8];
-        monan_stringFlag[0] = "vịt";
-        monan_stringFlag[1] = "canh";
-        monan_stringFlag[2] = "rau";
-        monan_stringFlag[3] = "cá";
-        monan_stringFlag[4] = "kho";
-        monan_stringFlag[5] = "thịt";
-        monan_stringFlag[6] = "gà";
-        monan_stringFlag[7] = "bò";
+        List<String> monan_stringFlag = new ArrayList<>();
+        monan_stringFlag.add("vịt");
+        monan_stringFlag.add("canh");
+        monan_stringFlag.add("rau");
+        monan_stringFlag.add("cá");
+        monan_stringFlag.add("kho");
+        monan_stringFlag.add("thịt");
+        monan_stringFlag.add("gà");
+        monan_stringFlag.add("bò");
 
-        final boolean[] monan_booleanFlag = new boolean[8];
-        monan_booleanFlag[0] = true;
-        monan_booleanFlag[1] = true;
-        monan_booleanFlag[2] = true;
-        monan_booleanFlag[3] = true;
-        monan_booleanFlag[4] = true;
-        monan_booleanFlag[5] = true;
-        monan_booleanFlag[6] = true;
-        monan_booleanFlag[7] = true;
-        listMonAnDaNau = new ArrayList<>();
+        List<Boolean> monan_booleanFlag = new ArrayList<>();
+        monan_booleanFlag.add(true);
+        monan_booleanFlag.add(true);
+        monan_booleanFlag.add(true);
+        monan_booleanFlag.add(true);
+        monan_booleanFlag.add(true);
+        monan_booleanFlag.add(true);
+        monan_booleanFlag.add(true);
+        monan_booleanFlag.add(true);
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference();
         databaseReference.child("danau").addValueEventListener(new ValueEventListener() {
@@ -181,15 +180,27 @@ public class MainActivity  extends AppCompatActivity {
                 for(DataSnapshot snap: snapshot.getChildren())
                 {
                     MonAn monAn = (MonAn) snap.getValue( MonAn.class);
-                    for(int i = 0; i <monan_booleanFlag.length;i++)
+                    for(int i = 0; i <monan_booleanFlag.size();i++)
                     {
-                        if (monAn.getTenmonan().toLowerCase(Locale.ROOT) == monan_stringFlag[i])
+                        if (monAn.getTenmonan().toLowerCase(Locale.ROOT) == monan_stringFlag.get(i))
                         {
-                            monan_booleanFlag[i] = false;
-                            answer.add(monan_stringFlag[i]);
+
+                            monan_booleanFlag.set(i, false);
                         }
                     }
                 }
+                for (int i = 0; i< monan_booleanFlag.size(); i++)
+                {
+                    Log.d(String.valueOf(monan_booleanFlag.get(i)) + String.valueOf(i), "gias trij cua cac co: ");
+                    if (monan_booleanFlag.get(i) == true)
+                    {
+                        answer.add(monan_stringFlag.get(i));
+                    }
+
+                }
+                loadMonAnDeXuat(answer);
+
+                //
             }
 
             @Override
@@ -198,18 +209,14 @@ public class MainActivity  extends AppCompatActivity {
             }
 
         });
-        List<String> ans = new ArrayList<>();
-        for (int i=0; i<monan_booleanFlag.length; i++)
-        {
-            if (monan_booleanFlag[i] == true)
-            {
-                ans.add(monan_stringFlag[i]);
-            }
-        }
-        return ans;
+
     }
-    public void loadMonAnDeXuat()
+    public void loadMonAnDeXuat(List<String> ans)
     {
+        for(int i= 0; i< ans.size(); i++)
+        {
+            Log.d(ans.get(i), "loadMonAnDeXuat: ");
+        }
         rcvDSMADN = findViewById(R.id.recycleDSMADN);
         listMonAnDeXuat = new ArrayList<>();
         monandexuatAdapter = new MonAnAdapter(listMonAnDeXuat, getApplicationContext());
@@ -218,10 +225,14 @@ public class MainActivity  extends AppCompatActivity {
         rcvDSMADN.setLayoutManager(linearLayoutManager);
         rcvDSMADN.setAdapter(monandexuatAdapter);
         List<String> monAnChuaNau = new ArrayList<>();
-        monAnChuaNau = checkMonDaNau();
+        ////
+        //code sẽ chèn ở đây
+        // hàm check món đã nấu -> para
+        //hàm đề xuất (hàm check món đã nấu)
+        ////
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference();
-        List<String> finalMonAnChuaNau = monAnChuaNau;
+        List<String> finalMonAnChuaNau = ans;
         databaseReference.child("monan").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

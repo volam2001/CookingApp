@@ -81,13 +81,16 @@ public class TimKiemActivity extends AppCompatActivity {
                     chiTietList = new ArrayList<>();
 
                     String tenmonan  = snap.child("tenmonan").getValue(String.class);
-                    if (tenmonan.toLowerCase(Locale.ROOT).contains(query.toLowerCase(Locale.ROOT))) {
+                    String tennguyenlieu = snap.child("nguyenlieu").getValue(String.class);
+                    if (tenmonan.toLowerCase(Locale.ROOT).contains(query.toLowerCase(Locale.ROOT)) ||
+                        tennguyenlieu.toLowerCase(Locale.ROOT).contains(query.toLowerCase(Locale.ROOT))) {
                         DataSnapshot dataref = snap.child("chitietmonan");
                         for (DataSnapshot item : dataref.getChildren()) {
                             String link = item.child("link").getValue(String.class);
                             String chitiet = item.child("chitiet").getValue(String.class);
                             chiTietList.add(new ChiTiet(link, chitiet));
                         }
+                        //ớt
 //
                         MonAn monAn = snap.getValue(MonAn.class);
 //                        monAn.setChitietcacbuoc(chiTietList);

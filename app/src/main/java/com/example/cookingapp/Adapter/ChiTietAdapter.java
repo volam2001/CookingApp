@@ -3,6 +3,7 @@ package com.example.cookingapp.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -47,7 +48,7 @@ public class ChiTietAdapter extends  RecyclerView.Adapter<ChiTietAdapter.ChiTiet
     }
 
     class ChiTietViewHolder extends RecyclerView.ViewHolder{
-        private TextView tvChitiet;
+        private EditText tvChitiet;
         private ImageView hinhanh;
         public ChiTietViewHolder(@NonNull View itemView) {
             super(itemView);

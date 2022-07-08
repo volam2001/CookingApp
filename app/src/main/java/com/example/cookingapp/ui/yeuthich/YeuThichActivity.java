@@ -70,10 +70,11 @@ public class YeuThichActivity extends AppCompatActivity {
                 {
                         MonAn monAn = snap.getValue(MonAn.class);
                         listMonAn.add(monAn);
+                    Log.d(monAn.getTenmonan(), "Các món đã yêu thích");
                 }
                 monanAdapter.notifyDataSetChanged();
             }
-
+            //ớt
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

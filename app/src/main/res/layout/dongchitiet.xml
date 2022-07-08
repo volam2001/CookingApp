@@ -14,7 +14,7 @@
         android:src="@drawable/img_start"
         android:layout_height="200dp"
         android:scaleType="centerCrop" />
-    <TextView
+    <EditText
         android:layout_marginTop="12dp"
         android:textColor="@android:color/background_dark"
         android:textAlignment="center"

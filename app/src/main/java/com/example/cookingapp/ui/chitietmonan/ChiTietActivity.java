@@ -3,12 +3,14 @@ package com.example.cookingapp.ui.chitietmonan;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +21,9 @@ import com.example.cookingapp.MainActivity;
 import com.example.cookingapp.Model.ChiTiet;
 import com.example.cookingapp.Model.MonAn;
 import com.example.cookingapp.R;
+import com.example.cookingapp.ui.danau.DaNauActivity;
+import com.example.cookingapp.ui.yeuthich.YeuThichActivity;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -31,6 +36,8 @@ public class ChiTietActivity extends AppCompatActivity {
     private ChiTietAdapter chiTietAdapter;
     private Button btnHome, btndone, btnlove;
     private TextView txtintroduce;
+    private NavigationView navigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +47,32 @@ public class ChiTietActivity extends AppCompatActivity {
         btnlove = findViewById(R.id.btnyeuthich);
         btndone = findViewById(R.id.btndone);
 
-
+        navigationView = findViewById(R.id.navigationview);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                if (id == R.id.nav_home)
+                {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getApplicationContext().startActivity(intent);
+                }
+                else if (id ==R.id.navdanau)
+                {
+                    Intent intent = new Intent(getApplicationContext(), DaNauActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getApplicationContext().startActivity(intent);
+                }
+                else if (id ==R.id.navyeuthich)
+                {
+                    Intent intent = new Intent(getApplicationContext(), YeuThichActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getApplicationContext().startActivity(intent);
+                }
+                return true;
+            }
+        });
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
