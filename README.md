@@ -37,8 +37,12 @@
 - ỨNG DỤNG HƯỚNG DẪN NẤU ĂN
 - CÁCH BUILD ỨNG DỤNG
   + Yêu cầu:
-    *Android Studio
-    *Java
+  
+    + Android Studio
+  
+    + Java
+
   + Clone repos về local sau đó chuyển sang nhánh master bằng: 
-  `git checkout master`
+ 
+        git checkout master
   + Sau đó build ứng dụng trong Android Studio và chạy ứng dụng bình thường
