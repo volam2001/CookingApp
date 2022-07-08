@@ -29,18 +29,22 @@ import java.util.List;
 
 public class ThemMonActivity extends AppCompatActivity {
     private Button btnthemmon, btncancel;
-    EditText tenmonan, tendaubep,nguyenlieu;
+    EditText txttenmonan, txttendaubep,txtnguyenlieu, txtbuoc1, txtbuoc2, txtbuoc3, txtbuoc4;
     ImageView hinhanh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dongthemmonan);
-        tenmonan = findViewById(R.id.txttenmonan);
-        tendaubep = findViewById(R.id.txttendaubep);
-        nguyenlieu = findViewById(R.id.txtnguyenlieu);
+        txttenmonan = findViewById(R.id.txttenmonan);
+        txttendaubep = findViewById(R.id.txttendaubep);
+        txtnguyenlieu = findViewById(R.id.txtnguyenlieu);
         btnthemmon = findViewById(R.id.btnthemmonan);
         hinhanh = findViewById(R.id.hinhanh);
+        txtbuoc1 = findViewById(R.id.txtchitiet1);
+        txtbuoc2 = findViewById(R.id.txtchitiet2);
+        txtbuoc3 = findViewById(R.id.txtchitiet3);
+        txtbuoc4 = findViewById(R.id.txtchitiet4);
         btncancel = findViewById(R.id.btncancle);
         btnthemmon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,17 +64,44 @@ public class ThemMonActivity extends AppCompatActivity {
     }
     public void clickbtn()
     {
-//        String tenmonan, String hinhanh, String tendaubep,
-//         //String nguyenlieu, List<ChiTiet> chitietcacbuoc
-//        List <ChiTiet> chiTietList = null;
-//        ChiTiet chitiet1 = new ChiTiet("https://cdn.tgdd.vn/2021/05/CookProduct/47884A90-BACC-4926-B0B9-D0F50640C8AE-SunnyTrinh-Copy(2)-1200x676.jpeg", "Chưa có chi tiết");
-//        chiTietList.add(chitiet1);
-//        String hinhanh = "https://cdn.tgdd.vn/2021/05/CookProduct/47884A90-BACC-4926-B0B9-D0F50640C8AE-SunnyTrinh-Copy(2)-1200x676.jpeg";
-//        MonAn monAn = new MonAn(tenmonan.getText().toString(), hinhanh, tendaubep.getText().toString(), nguyenlieu.getText().toString(), chiTietList);
-//        String key = tenmonan.getText().toString();
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference databaseReference = database.getReference().child("monan").child(key);
-//        databaseReference.setValue(monAn);
+        String hinhanh;
+        List<ChiTiet> chiTietList = new ArrayList<>();
+
+        String buoc1 = txtbuoc1.getText().toString();
+        String buoc2 = txtbuoc2.getText().toString();
+        String buoc3 = txtbuoc3.getText().toString();
+        String buoc4 = txtbuoc4.getText().toString();
+        if (buoc1 != "Bước 1")
+        {
+            String linkchitiet = "https://cdn.tgdd.vn/2021/05/CookProduct/47884A90-BACC-4926-B0B9-D0F50640C8AE-SunnyTrinh-Copy(2)-1200x676.jpeg";
+            ChiTiet chiTiet1 = new ChiTiet(linkchitiet, buoc1);
+            chiTietList.add(chiTiet1);
+        }
+        if (buoc2 != "Bước 2")
+        {
+            String linkchitiet = "https://cdn.tgdd.vn/2021/05/CookProduct/47884A90-BACC-4926-B0B9-D0F50640C8AE-SunnyTrinh-Copy(2)-1200x676.jpeg";
+            ChiTiet chiTiet2 = new ChiTiet(linkchitiet, buoc2);
+            chiTietList.add(chiTiet2);
+        }
+        if (buoc3 != "Bước 3")
+        {
+            String linkchitiet = "https://cdn.tgdd.vn/2021/05/CookProduct/47884A90-BACC-4926-B0B9-D0F50640C8AE-SunnyTrinh-Copy(2)-1200x676.jpeg";
+            ChiTiet chiTiet3 = new ChiTiet(linkchitiet, buoc3);
+            chiTietList.add(chiTiet3);
+        }
+        if (buoc4 != "Bước 4")
+        {
+            String linkchitiet = "https://cdn.tgdd.vn/2021/05/CookProduct/47884A90-BACC-4926-B0B9-D0F50640C8AE-SunnyTrinh-Copy(2)-1200x676.jpeg";
+            ChiTiet chiTiet4 = new ChiTiet(linkchitiet, buoc4);
+            chiTietList.add(chiTiet4);
+        }
+
+        hinhanh = "https://cdn.tgdd.vn/2021/05/CookProduct/47884A90-BACC-4926-B0B9-D0F50640C8AE-SunnyTrinh-Copy(2)-1200x676.jpeg";
+        MonAn monAn = new MonAn(txttenmonan.getText().toString(), hinhanh, txttendaubep.getText().toString(), txtnguyenlieu.getText().toString(), chiTietList);
+        String key = txttenmonan.getText().toString();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference().child("monan/"+key);
+        databaseReference.setValue(monAn);
         AlertDialog alertDialog = new AlertDialog.Builder(this).create();
         alertDialog.setTitle("Alert");
         alertDialog.setMessage("Bạn đã thêm món thành công");
@@ -81,6 +112,5 @@ public class ThemMonActivity extends AppCompatActivity {
                     }
                 });
         alertDialog.show();
-
     }
 }

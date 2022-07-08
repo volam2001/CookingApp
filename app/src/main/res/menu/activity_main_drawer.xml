@@ -9,12 +9,12 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Trang Chủ" />
         <item
-            android:id="@+id/navlist"
+            android:id="@+id/navdanau"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Danh Sách Món Ăn" />
+            android:title="Món ăn đã nấu" />
         <item
-            android:id="@+id/navrec"
+            android:id="@+id/navyeuthich"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Đề xuất" />
+            android:title="Món ăn yêu thích" />
     </group>
 </menu>

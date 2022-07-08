@@ -4,20 +4,21 @@
     android:layout_width="match_parent"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
+    android:gravity="center"
     android:layout_marginTop="20dp"
     android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/hinhanh"
         android:layout_width="wrap_content"
-        android:src="@drawable/anh"
+        android:src="@drawable/img_start"
         android:layout_height="200dp"
         android:scaleType="centerCrop" />
     <TextView
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="12dp"
         android:textColor="@android:color/background_dark"
-        android:text="Để nấu thịt kho tiêu chúng ta cần phải chuẩn bị một ít thịt ba chỉ\n
-Thịt ba chỉ cắt miếng vừa ăn, kho lâu tự nó chín."
+        android:textAlignment="center"
+        android:text="Hãy cùng nhau nấu món này nhé"
         android:textStyle="bold"
         android:textSize="15sp"
         android:id="@+id/tvchitiet"

@@ -53,6 +53,42 @@
         android:id="@+id/txtnguyenlieu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_marginTop="5dp"
+        android:textColor="@android:color/background_dark"
+        android:text="Bước 1"
+        android:layout_marginLeft="10dp"
+        android:textSize="12sp"
+        android:id="@+id/txtchitiet1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_marginTop="5dp"
+        android:textColor="@android:color/background_dark"
+        android:text="Bước 2"
+        android:layout_marginLeft="10dp"
+        android:textSize="12sp"
+        android:id="@+id/txtchitiet2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_marginTop="5dp"
+        android:textColor="@android:color/background_dark"
+        android:text="Bước 3"
+        android:layout_marginLeft="10dp"
+        android:textSize="12sp"
+        android:id="@+id/txtchitiet3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_marginTop="5dp"
+        android:textColor="@android:color/background_dark"
+        android:text="Bước 4"
+        android:layout_marginLeft="10dp"
+        android:textSize="12sp"
+        android:id="@+id/txtchitiet4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:layout_width="match_parent"

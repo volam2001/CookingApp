@@ -6,7 +6,10 @@ public class ChiTiet implements Serializable {
     private String link;
     private String chitiet;
 
+    public ChiTiet()
+    {
 
+    }
     public ChiTiet(String link, String chitiet) {
         this.link = link;
         this.chitiet = chitiet;

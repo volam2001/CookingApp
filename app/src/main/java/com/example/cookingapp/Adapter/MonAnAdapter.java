@@ -43,7 +43,6 @@ public class MonAnAdapter extends RecyclerView.Adapter<MonAnAdapter.MonAnViewHol
     @Override
     public void onBindViewHolder(@NonNull MonAnViewHolder holder, int position) {
         final MonAn monAn = listMonan.get(position);
-        Log.d(listMonan.get(position).getChitietcacbuoc().get(0).getChitiet(), "onBindViewHolder: ");
         if (monAn == null)
         {
             return;
@@ -55,19 +54,17 @@ public class MonAnAdapter extends RecyclerView.Adapter<MonAnAdapter.MonAnViewHol
         holder.layoutItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(monAn.getTenmonan(), "onClick: ");
-                Log.d(monAn.getChitietcacbuoc().get(0).getChitiet(), "onClick: ");
-                goDetail(monAn.getChitietcacbuoc());
+                goDetail(monAn);
             }
         });
         //parameter là function
     }
-    private void goDetail(List <ChiTiet> chitietmonan)
+    private void goDetail(MonAn monAn)
     {
         Intent intent = new Intent(context, ChiTietActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("chiTietList", (Serializable) chitietmonan);
+        bundle.putSerializable("monAn", (Serializable) monAn);
         intent.putExtras(bundle);
         context.startActivity(intent);
     }

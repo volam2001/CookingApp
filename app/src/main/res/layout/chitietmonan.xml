@@ -6,24 +6,55 @@
     android:background="#F6D4A7"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <Button
-        android:text="Trang chủ"
-        android:id="@+id/btnHome"
-        android:layout_width="wrap_content"
-        android:backgroundTint="#E82A2739"
-        android:layout_height="wrap_content"></Button>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center"
+
+        android:layout_height="wrap_content">
+        <Button
+            android:textSize="10dp"
+            android:layout_width="wrap_content"
+            android:layout_margin="5dp"
+            android:backgroundTint="#E82A2739"
+
+            android:id="@+id/btndone"
+            android:text="Đã nấu xong"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:textSize="10dp"
+            android:id="@+id/btnyeuthich"
+            android:backgroundTint="#E82A2739"
+
+            android:layout_width="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Yêu thích"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:textSize="10dp"
+            android:text="Home"
+            android:layout_margin="5dp"
+            android:id="@+id/btnHome"
+            android:layout_width="wrap_content"
+            android:backgroundTint="#E82A2739"
+            android:layout_height="wrap_content"></Button>
+    </LinearLayout>
+
+
         <TextView
+            android:id="@+id/txtintroduce"
             android:padding="5dp"
             android:textStyle="bold"
             android:textSize="20sp"
             android:layout_marginTop="10dp"
-            android:text="Cách nấu món này"
+            android:text="Cách nấu món"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:id="@+id/rcvdongchitiet"
             android:layout_height="wrap_content"/>
+
     <com.google.android.material.navigation.NavigationView
         android:layout_width="320dp"
         app:menu="@menu/activity_main_drawer"

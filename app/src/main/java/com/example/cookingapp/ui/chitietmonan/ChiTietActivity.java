@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,6 +19,8 @@ import com.example.cookingapp.MainActivity;
 import com.example.cookingapp.Model.ChiTiet;
 import com.example.cookingapp.Model.MonAn;
 import com.example.cookingapp.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +29,18 @@ public class ChiTietActivity extends AppCompatActivity {
     private List<ChiTiet> chiTietList;
     private RecyclerView rcvdongchitiet;
     private ChiTietAdapter chiTietAdapter;
-    private Button btnHome;
+    private Button btnHome, btndone, btnlove;
+    private TextView txtintroduce;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chitietmonan);
         btnHome = findViewById(R.id.btnHome);
+        btnlove = findViewById(R.id.btnyeuthich);
+        btndone = findViewById(R.id.btndone);
+
+
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,16 +54,36 @@ public class ChiTietActivity extends AppCompatActivity {
         {
             return ;
         }
-//        MonAn monAn = (MonAn) bundle.get("monan");
-//        Log.d(monAn.getTenmonan(), "onCreate fmiajfoiqfowqifjqwoijf: ");
+        MonAn monAn = (MonAn) bundle.get("monAn");
         rcvdongchitiet = findViewById(R.id.rcvdongchitiet);
         rcvdongchitiet.findViewById(R.id.tvchitiet);
-//        chiTietList = monAn.getChitietcacbuoc();
-        List<ChiTiet> chiTietList = (List<ChiTiet>) bundle.get("chiTietList");
-
+        txtintroduce = findViewById(R.id.txtintroduce);
+        String introduce = monAn.getTenmonan();
+        txtintroduce.setText(introduce);
+        chiTietList = monAn.getChitietcacbuoc();
         chiTietAdapter = new ChiTietAdapter(chiTietList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         rcvdongchitiet.setLayoutManager(linearLayoutManager);
         rcvdongchitiet.setAdapter(chiTietAdapter);
+        btndone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                DatabaseReference databaseReference = firebaseDatabase.getReference();
+                databaseReference.child("danau/"+monAn.getTenmonan()).setValue(monAn);
+                Toast toast = Toast.makeText(getApplicationContext(), "Bạn thật giỏi quá", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+        btnlove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                DatabaseReference databaseReference = firebaseDatabase.getReference();
+                databaseReference.child("yeuthich/"+monAn.getTenmonan()).setValue(monAn);
+                Toast toast = Toast.makeText(getApplicationContext(), "Đã thêm vào danh sách yêu thích", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
     }
 }

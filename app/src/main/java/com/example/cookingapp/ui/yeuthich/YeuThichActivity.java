@@ -1,4 +1,4 @@
-package com.example.cookingapp.ui.timkiem;
+package com.example.cookingapp.ui.yeuthich;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class TimKiemActivity extends AppCompatActivity {
+public class YeuThichActivity extends AppCompatActivity {
     private List<MonAn> listMonAn;
     private RecyclerView rcvDSMA;
     private List <ChiTiet> chiTietList;
@@ -39,7 +39,7 @@ public class TimKiemActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ketquatimkiem);
+        setContentView(R.layout.danhsachyeuthich);
         btnHome = findViewById(R.id.btnHome);
         rcvDSMA  =findViewById(R.id.rcvdongketqua);
         btnHome.setOnClickListener(new View.OnClickListener() {
@@ -50,17 +50,9 @@ public class TimKiemActivity extends AppCompatActivity {
                 getApplicationContext().startActivity(intent);
             }
         });
-        Bundle bundle =  getIntent().getExtras();
-        if (bundle == null)
-        {
-            Log.d("Empty", "onCreate: ");
-            return ;
-        }
-        String query = (String) bundle.get("query");
-        Log.d("Câu query là:", query);
-        loadMonAn(query);
+        loadMonAn();
     }
-    public void loadMonAn(String query)
+    public void loadMonAn()
     {
         listMonAn = new ArrayList<>();
         chiTietList = new ArrayList<>();
@@ -70,30 +62,14 @@ public class TimKiemActivity extends AppCompatActivity {
         rcvDSMA.setAdapter(monanAdapter);
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference();
-        Log.d(query, "Kết quả tìm kiếm: ");
-        databaseReference.child("monan").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("yeuthich").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("load", "onDataChange: ");
 
                 for(DataSnapshot snap: snapshot.getChildren())
                 {
-                    chiTietList = new ArrayList<>();
-
-                    String tenmonan  = snap.child("tenmonan").getValue(String.class);
-                    if (tenmonan.toLowerCase(Locale.ROOT).contains(query.toLowerCase(Locale.ROOT))) {
-                        DataSnapshot dataref = snap.child("chitietmonan");
-                        for (DataSnapshot item : dataref.getChildren()) {
-                            String link = item.child("link").getValue(String.class);
-                            String chitiet = item.child("chitiet").getValue(String.class);
-                            chiTietList.add(new ChiTiet(link, chitiet));
-                        }
-//
                         MonAn monAn = snap.getValue(MonAn.class);
-//                        monAn.setChitietcacbuoc(chiTietList);
                         listMonAn.add(monAn);
-                    }
-
                 }
                 monanAdapter.notifyDataSetChanged();
             }

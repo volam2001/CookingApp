@@ -25,9 +25,12 @@ import com.example.cookingapp.Model.ChiTiet;
 import com.example.cookingapp.Model.MonAn;
 import com.example.cookingapp.R;
 import com.example.cookingapp.ui.chitietmonan.ChiTietActivity;
+import com.example.cookingapp.ui.danau.DaNauActivity;
 import com.example.cookingapp.ui.listmonan.ListDSMNActivity;
 import com.example.cookingapp.ui.themmonan.ThemMonActivity;
 import com.example.cookingapp.ui.timkiem.TimKiemActivity;
+import com.example.cookingapp.ui.yeuthich.YeuThichActivity;
+import com.example.cookingapp.ui.yeuthich.YeuThichActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -40,15 +43,16 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity  extends AppCompatActivity {
-    private RecyclerView rcvDSMA, rcvDSMADN, rcvbanner;
-    private MonAnAdapter monanAdapter, monandanauAdapter;
-    private List<MonAn> listMonAn, listMonAnDaNau;
-    private List<ChiTiet> chiTietList, chiTietdanauList;
+    private RecyclerView rcvDSMA, rcvDSMADN;
+    private MonAnAdapter monanAdapter, monandexuatAdapter;
+    private List<MonAn> listMonAn, listMonAnDaNau, listMonAnDeXuat;
     private FloatingActionButton floatingActionButton;
     private SearchView searchView;
     private NavigationView navigationView;
+    private List<String> monAnChuaNau;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,15 +69,15 @@ public class MainActivity  extends AppCompatActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     getApplicationContext().startActivity(intent);
                 }
-                else if (id ==R.id.navlist)
+                else if (id ==R.id.navdanau)
                 {
-                    Intent intent = new Intent(getApplicationContext(), ListDSMNActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), DaNauActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     getApplicationContext().startActivity(intent);
                 }
-                else if (id ==R.id.navrec)
+                else if (id ==R.id.navyeuthich)
                 {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), YeuThichActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     getApplicationContext().startActivity(intent);
                 }
@@ -111,7 +115,7 @@ public class MainActivity  extends AppCompatActivity {
             }
         });
         loadMonAn();
-        loadMonAnDaNau();
+        loadMonAnDeXuat();
     }
 
     @Override
@@ -123,7 +127,6 @@ public class MainActivity  extends AppCompatActivity {
     {
         rcvDSMA = findViewById(R.id.recycleDSMN);
         listMonAn = new ArrayList<>();
-        chiTietList = new ArrayList<>();
         monanAdapter = new MonAnAdapter(listMonAn, getApplicationContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         rcvDSMA.setLayoutManager(linearLayoutManager);
@@ -133,87 +136,109 @@ public class MainActivity  extends AppCompatActivity {
         databaseReference.child("monan").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                listMonAn.clear();
-
                 for(DataSnapshot snap: snapshot.getChildren())
                 {
-                    chiTietList = new ArrayList<>();
-
-                    String tendaubep = snap.child("tendaubep").getValue(String.class);
-                    String hinhanh = snap.child("hinhanh").getValue(String.class);
-                    String tenmonan  = snap.child("tenmonan").getValue(String.class);
-                    DataSnapshot dataref = snap.child("chitietmonan");
-//                    chiTietList.clear();
-                    for (DataSnapshot item: dataref.getChildren())
-                    {
-                        String link = item.child("link").getValue(String.class);
-                        String chitiet = item.child("chitiet").getValue(String.class);
-                        chiTietList.add(new ChiTiet(link, chitiet));
-                    }
-                    String nguyenlieu =  snap.child("nguyenlieu").getValue(String.class);
-
-                    MonAn monAn = new MonAn(tenmonan, hinhanh, tendaubep, nguyenlieu, chiTietList);
-
+                    MonAn monAn = (MonAn) snap.getValue(MonAn.class);
                     listMonAn.add(monAn);
-                    Log.d("===================*************===============", "onDataChange: ");
-
                 }
                 monanAdapter.notifyDataSetChanged();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
     }
-    public void loadMonAnDaNau()
+    public List<String> checkMonDaNau()
+    {
+        final List<String> answer = new ArrayList<>();
+        listMonAnDaNau = new ArrayList<>();
+        final String[] monan_stringFlag = new String[8];
+        monan_stringFlag[0] = "vịt";
+        monan_stringFlag[1] = "canh";
+        monan_stringFlag[2] = "rau";
+        monan_stringFlag[3] = "cá";
+        monan_stringFlag[4] = "kho";
+        monan_stringFlag[5] = "thịt";
+        monan_stringFlag[6] = "gà";
+        monan_stringFlag[7] = "bò";
+
+        final boolean[] monan_booleanFlag = new boolean[8];
+        monan_booleanFlag[0] = true;
+        monan_booleanFlag[1] = true;
+        monan_booleanFlag[2] = true;
+        monan_booleanFlag[3] = true;
+        monan_booleanFlag[4] = true;
+        monan_booleanFlag[5] = true;
+        monan_booleanFlag[6] = true;
+        monan_booleanFlag[7] = true;
+        listMonAnDaNau = new ArrayList<>();
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference();
+        databaseReference.child("danau").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snap: snapshot.getChildren())
+                {
+                    MonAn monAn = (MonAn) snap.getValue( MonAn.class);
+                    for(int i = 0; i <monan_booleanFlag.length;i++)
+                    {
+                        if (monAn.getTenmonan().toLowerCase(Locale.ROOT) == monan_stringFlag[i])
+                        {
+                            monan_booleanFlag[i] = false;
+                            answer.add(monan_stringFlag[i]);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
+        List<String> ans = new ArrayList<>();
+        for (int i=0; i<monan_booleanFlag.length; i++)
+        {
+            if (monan_booleanFlag[i] == true)
+            {
+                ans.add(monan_stringFlag[i]);
+            }
+        }
+        return ans;
+    }
+    public void loadMonAnDeXuat()
     {
         rcvDSMADN = findViewById(R.id.recycleDSMADN);
-        listMonAnDaNau = new ArrayList<>();
-        chiTietdanauList = new ArrayList<>();
-        monandanauAdapter = new MonAnAdapter(listMonAnDaNau, getApplicationContext());
+        listMonAnDeXuat = new ArrayList<>();
+        monandexuatAdapter = new MonAnAdapter(listMonAnDeXuat, getApplicationContext());
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         rcvDSMADN.setLayoutManager(linearLayoutManager);
-//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL);
-        rcvDSMADN.setAdapter(monandanauAdapter);
-
+        rcvDSMADN.setAdapter(monandexuatAdapter);
+        List<String> monAnChuaNau = new ArrayList<>();
+        monAnChuaNau = checkMonDaNau();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference();
+        List<String> finalMonAnChuaNau = monAnChuaNau;
         databaseReference.child("monan").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                listMonAnDaNau.clear();
-
                 for(DataSnapshot snap: snapshot.getChildren())
                 {
-
-                    String tendaubep = snap.child("tendaubep").getValue(String.class);
-                    Long danau  = snap.child("danau").getValue(Long.class);
-                    String hinhanh = snap.child("hinhanh").getValue(String.class);
-                    String tenmonan  = snap.child("tenmonan").getValue(String.class);
-                    DataSnapshot dataref = snap.child("chitietmonan");
-                    chiTietdanauList = new ArrayList<>();
-
-                    for (DataSnapshot item: dataref.getChildren())
-                    {
-                        if (item.child("link") != null) {
-                            String link = item.child("link").getValue(String.class);
-                            String chitiet = item.child("chitiet").getValue(String.class);
-                            chiTietdanauList.add(new ChiTiet(link, chitiet));
+                    MonAn monAn = (MonAn) snap.getValue( MonAn.class);
+                    String tenMon = monAn.getTenmonan();
+                    if (finalMonAnChuaNau != null) {
+                        for (int i = 0; i < finalMonAnChuaNau.size(); i++) {
+                            if (monAn.getTenmonan().toLowerCase(Locale.ROOT).contains(finalMonAnChuaNau.get(i).toLowerCase(Locale.ROOT))) {
+                                listMonAnDeXuat.add(monAn);
+                                break;
+                            }
                         }
                     }
-                    String nguyenlieu =  snap.child("nguyenlieu").getValue(String.class);
-
-                    MonAn monAn = new MonAn(tenmonan, hinhanh, tendaubep, nguyenlieu, chiTietdanauList);
-                    if ((Long)danau == 1)
-                    {
-                        listMonAnDaNau.add(monAn);
-                    }
-
                 }
-                monandanauAdapter.notifyDataSetChanged();
+                monandexuatAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -226,14 +251,5 @@ public class MainActivity  extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-//        arrayList_MA  = monAnController.getDataListMN();
-//        DanhSachMonAnAdapter danhSachBaiHatAdapter = new DanhSachMonAnAdapter(arrayList_MA,this);
-//        rcvDSMA.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-//        rcvDSMA.setAdapter(danhSachBaiHatAdapter);
-//
-//        arrayList_BHM  = baiHatController.getDataBaihatmoi();
-//        DanhSachBaiHatMoiAdapter danhSachBaiHatMoiAdapter = new DanhSachBaiHatMoiAdapter(arrayList_BHM,this);
-//        rcvDSBHM.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-//        rcvDSBHM.setAdapter(danhSachBaiHatMoiAdapter);
     }
 }
