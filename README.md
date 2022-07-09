@@ -31,7 +31,7 @@
 | STT    | MSSV          | Họ và Tên              | Github                                                  | Email                   |
 | ------ |:-------------:| ----------------------:|--------------------------------------------------------:|-------------------------:
 | 1      |               | Đinh Trọng Tùng Sơn    |                                                         |12345678@gm.uit.edu.vn   |
-| 2      |               | Võ Tá Lâm              |                                                         |12345678@gm.uit.edu.vn   |
+| 2      |  19521744            | Võ Tá Lâm              |                                                         |19521744@gm.uit.edu.vn   |
 | 3      | 19522154      | Nguyễn Văn Tài         |[nguyentai090301](https://github.com/nguyentai090301)    |19522154@gm.uit.edu.vn   |
 ## ĐỒ ÁN CUỐI KỲ
 - ỨNG DỤNG HƯỚNG DẪN NẤU ĂN
